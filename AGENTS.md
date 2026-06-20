@@ -84,7 +84,7 @@ Initial fields:
 * name
 * description
 * sku
-* price
+* price_cents
 * stock
 * is_active
 * timestamps
@@ -94,7 +94,8 @@ Rules:
 * Name and SKU are required.
 * SKU must be unique.
 * A product must belong to an existing category.
-* Price and stock cannot be negative.
+* Monetary values are stored in cents as integers.
+* Price cents and stock cannot be negative.
 * Products and categories may be activated or deactivated.
 * A product from an inactive category is not considered available.
 
