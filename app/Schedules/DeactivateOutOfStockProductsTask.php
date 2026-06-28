@@ -10,8 +10,8 @@ class DeactivateOutOfStockProductsTask
         private readonly DeactivateOutOfStockProducts $deactivateOutOfStockProducts,
     ) {}
 
-    public function __invoke(): int
+    public function __invoke(): void
     {
-        return $this->deactivateOutOfStockProducts->execute();
+        $this->deactivateOutOfStockProducts->execute();
     }
 }
