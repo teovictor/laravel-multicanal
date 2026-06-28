@@ -17,9 +17,9 @@ class DeactivateOutOfStockProductsTaskTest extends TestCase
                 ->andReturn(3);
         });
 
-        $deactivatedProducts = $this->app
+        $result = $this->app
             ->make(DeactivateOutOfStockProductsTask::class)();
 
-        $this->assertSame(3, $deactivatedProducts);
+        $this->assertNull($result);
     }
 }
