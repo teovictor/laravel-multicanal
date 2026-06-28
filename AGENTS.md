@@ -14,7 +14,7 @@ All entry points must reuse the same application use cases and business rules.
 
 ## Technology
 
-* PHP 8.5+
+* PHP 8.4.1+
 * Laravel 13
 * SQLite
 * Blade
