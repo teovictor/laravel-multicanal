@@ -15,8 +15,7 @@ class CreateCategoryJob implements ShouldQueue
         public readonly string $name,
         public readonly ?string $description = null,
         public readonly bool $isActive = true,
-    ) {
-    }
+    ) {}
 
     public function handle(CreateCategory $createCategory): void
     {

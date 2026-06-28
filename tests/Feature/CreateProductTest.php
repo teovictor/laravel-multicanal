@@ -20,7 +20,7 @@ class CreateProductTest extends TestCase
     {
         $category = Category::factory()->create();
 
-        $product = (new CreateProduct())->execute(new CreateProductData(
+        $product = (new CreateProduct)->execute(new CreateProductData(
             categoryId: $category->id,
             name: 'Mechanical Keyboard',
             description: 'Compact keyboard with brown switches.',
@@ -52,14 +52,14 @@ class CreateProductTest extends TestCase
 
     public function test_it_creates_an_active_product_by_default(): void
     {
-        $product = (new CreateProduct())->execute($this->validData());
+        $product = (new CreateProduct)->execute($this->validData());
 
         $this->assertTrue($product->is_active);
     }
 
     public function test_it_creates_an_inactive_product(): void
     {
-        $product = (new CreateProduct())->execute($this->validData(isActive: false));
+        $product = (new CreateProduct)->execute($this->validData(isActive: false));
 
         $this->assertFalse($product->is_active);
 
@@ -71,7 +71,7 @@ class CreateProductTest extends TestCase
 
     public function test_it_creates_a_product_without_description(): void
     {
-        $product = (new CreateProduct())->execute($this->validData(description: null));
+        $product = (new CreateProduct)->execute($this->validData(description: null));
 
         $this->assertNull($product->description);
 
@@ -83,7 +83,7 @@ class CreateProductTest extends TestCase
 
     public function test_it_creates_a_product_with_zero_price_cents_and_zero_stock(): void
     {
-        $product = (new CreateProduct())->execute($this->validData(
+        $product = (new CreateProduct)->execute($this->validData(
             priceCents: 0,
             stock: 0,
         ));
@@ -100,7 +100,7 @@ class CreateProductTest extends TestCase
 
     public function test_it_preserves_text_values_without_normalization(): void
     {
-        $product = (new CreateProduct())->execute($this->validData(
+        $product = (new CreateProduct)->execute($this->validData(
             name: '  Mixed Case Product  ',
             description: '  Description with intentional spacing.  ',
             sku: '  SKU-Mixed-001  ',
@@ -117,7 +117,7 @@ class CreateProductTest extends TestCase
         $this->expectExceptionMessage('Product name is required.');
 
         try {
-            (new CreateProduct())->execute($this->validData(name: ''));
+            (new CreateProduct)->execute($this->validData(name: ''));
         } finally {
             $this->assertDatabaseCount('products', 0);
         }
@@ -129,7 +129,7 @@ class CreateProductTest extends TestCase
         $this->expectExceptionMessage('Product name is required.');
 
         try {
-            (new CreateProduct())->execute($this->validData(name: '   '));
+            (new CreateProduct)->execute($this->validData(name: '   '));
         } finally {
             $this->assertDatabaseCount('products', 0);
         }
@@ -141,7 +141,7 @@ class CreateProductTest extends TestCase
         $this->expectExceptionMessage('Product SKU is required.');
 
         try {
-            (new CreateProduct())->execute($this->validData(sku: ''));
+            (new CreateProduct)->execute($this->validData(sku: ''));
         } finally {
             $this->assertDatabaseCount('products', 0);
         }
@@ -153,7 +153,7 @@ class CreateProductTest extends TestCase
         $this->expectExceptionMessage('Product SKU is required.');
 
         try {
-            (new CreateProduct())->execute($this->validData(sku: '   '));
+            (new CreateProduct)->execute($this->validData(sku: '   '));
         } finally {
             $this->assertDatabaseCount('products', 0);
         }
@@ -165,7 +165,7 @@ class CreateProductTest extends TestCase
         $this->expectExceptionMessage('Product price cents cannot be negative.');
 
         try {
-            (new CreateProduct())->execute($this->validData(priceCents: -1));
+            (new CreateProduct)->execute($this->validData(priceCents: -1));
         } finally {
             $this->assertDatabaseCount('products', 0);
         }
@@ -177,7 +177,7 @@ class CreateProductTest extends TestCase
         $this->expectExceptionMessage('Product stock cannot be negative.');
 
         try {
-            (new CreateProduct())->execute($this->validData(stock: -1));
+            (new CreateProduct)->execute($this->validData(stock: -1));
         } finally {
             $this->assertDatabaseCount('products', 0);
         }
@@ -188,7 +188,7 @@ class CreateProductTest extends TestCase
         $this->expectException(ModelNotFoundException::class);
 
         try {
-            (new CreateProduct())->execute(new CreateProductData(
+            (new CreateProduct)->execute(new CreateProductData(
                 categoryId: 999,
                 name: 'Mechanical Keyboard',
                 description: 'Compact keyboard with brown switches.',
@@ -212,7 +212,7 @@ class CreateProductTest extends TestCase
 
         $this->expectException(QueryException::class);
 
-        (new CreateProduct())->execute(new CreateProductData(
+        (new CreateProduct)->execute(new CreateProductData(
             categoryId: $category->id,
             name: 'Another Product',
             description: null,
