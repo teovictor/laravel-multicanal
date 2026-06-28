@@ -14,7 +14,7 @@ class CreateCategoryTest extends TestCase
 
     public function test_it_creates_a_category(): void
     {
-        $category = (new CreateCategory())->execute(new CreateCategoryData(
+        $category = (new CreateCategory)->execute(new CreateCategoryData(
             name: 'Office Supplies',
             description: 'Products used in office routines.',
         ));
@@ -33,7 +33,7 @@ class CreateCategoryTest extends TestCase
 
     public function test_it_creates_an_active_category_by_default(): void
     {
-        $category = (new CreateCategory())->execute(new CreateCategoryData(
+        $category = (new CreateCategory)->execute(new CreateCategoryData(
             name: 'Books',
         ));
 
@@ -42,7 +42,7 @@ class CreateCategoryTest extends TestCase
 
     public function test_it_creates_an_inactive_category(): void
     {
-        $category = (new CreateCategory())->execute(new CreateCategoryData(
+        $category = (new CreateCategory)->execute(new CreateCategoryData(
             name: 'Archived Items',
             description: 'Items that are no longer available.',
             isActive: false,
@@ -58,7 +58,7 @@ class CreateCategoryTest extends TestCase
 
     public function test_it_creates_a_category_without_description(): void
     {
-        $category = (new CreateCategory())->execute(new CreateCategoryData(
+        $category = (new CreateCategory)->execute(new CreateCategoryData(
             name: 'Books',
             description: null,
         ));
@@ -77,7 +77,7 @@ class CreateCategoryTest extends TestCase
         $this->expectExceptionMessage('Category name is required.');
 
         try {
-            (new CreateCategory())->execute(new CreateCategoryData(
+            (new CreateCategory)->execute(new CreateCategoryData(
                 name: '',
             ));
         } finally {
@@ -91,7 +91,7 @@ class CreateCategoryTest extends TestCase
         $this->expectExceptionMessage('Category name is required.');
 
         try {
-            (new CreateCategory())->execute(new CreateCategoryData(
+            (new CreateCategory)->execute(new CreateCategoryData(
                 name: '   ',
             ));
         } finally {
@@ -101,7 +101,7 @@ class CreateCategoryTest extends TestCase
 
     public function test_it_does_not_normalize_category_name(): void
     {
-        $category = (new CreateCategory())->execute(new CreateCategoryData(
+        $category = (new CreateCategory)->execute(new CreateCategoryData(
             name: '  Mixed Case Name  ',
         ));
 

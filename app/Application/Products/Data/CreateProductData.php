@@ -12,6 +12,5 @@ final readonly class CreateProductData
         public int $priceCents,
         public int $stock,
         public bool $isActive = true,
-    ) {
-    }
+    ) {}
 }

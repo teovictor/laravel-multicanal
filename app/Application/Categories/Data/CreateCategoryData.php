@@ -8,6 +8,5 @@ final readonly class CreateCategoryData
         public string $name,
         public ?string $description = null,
         public bool $isActive = true,
-    ) {
-    }
+    ) {}
 }
